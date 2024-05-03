@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { LuChevronFirst, LuChevronLast, LuLayoutDashboard, LuLifeBuoy, LuLogOut } from 'react-icons/lu'
+import { LuChevronFirst, LuLayoutDashboard, LuLifeBuoy, LuLogOut } from 'react-icons/lu'
 import logo from '../../assets/logo.jpg'
 import { NavLink, Outlet } from 'react-router-dom'
-import { BiCategory, BiChevronDown, BiChevronUp, BiHome, BiLayer } from 'react-icons/bi'
+import { BiCategory, BiChevronDown, BiHome, BiLayer } from 'react-icons/bi'
 import { CiSettings, CiStickyNote } from 'react-icons/ci'
 import { BsCalendarDate, BsFlag } from 'react-icons/bs'
 import pf from './../../assets/pf.jpg'
@@ -22,7 +22,7 @@ function Sidebar_() {
                 <button
                 onClick={()=> setExpanded((curr) => !curr)}
                 className=' p-1.5 rounded-lg bg-white hover:bg-indigo-200 hover:text-indigo-600 duration-200'>
-                    {expanded ? <LuChevronFirst className='text-2xl' /> : <LuChevronLast className='text-2xl' />}
+                    <LuChevronFirst className={`text-2xl transition-all ${expanded ? '' : ' rotate-180'}`} />
                 </button>
             </div>
 
@@ -38,23 +38,21 @@ function Sidebar_() {
                     <span className={`overflow-hidden ${expanded ? 'ml-3 w-40 transition-all' : ' w-0 transition-all'} `}>Dashboard</span>
                 </NavLink>
 
-                <div className={`${colapse ? ' bg-transparent':' bg-indigo-50 rounded-md'}`}>
+                <div className={` transition-all ${colapse ? ' bg-transparent':' bg-indigo-50 rounded-md'}`}>
                     <NavLink
                     onClick={()=> setColapse((curr) => !curr)}
                     className={({isActive})=> isActive ? `p-3 my-1 hover:bg-indigo-100 hover:text-indigo-600 rounded-md flex items-center transition-all` : `p-3 my-1 hover:bg-indigo-100 hover:text-indigo-600 rounded-md flex items-center transition-all`}>
                         <CiStickyNote className='text-xl' />
                         <p className={`overflow-hidden ${expanded ? 'ml-3 w-40 transition-all' : ' w-0 transition-all'} `}>Projects</p> 
-                       {
-                        colapse ? <BiChevronDown className={`text-xl`} /> : <BiChevronUp className={`text-xl`} />
-                       }
+                       <BiChevronDown className={`text-xl transition-all ${colapse ? '' : ' rotate-180'} ${expanded ? 'block' : ' hidden'} `} />
                     </NavLink>
                     {/* creating Sub Menu */} 
-                    <div className={`overflow-hidden duration-200 ${expanded ? 'px-4' : 'px-0'} ${colapse ? 'h-0 border-0' : 'block rounded-lg duration-200'}`}>
+                    <div className={`overflow-hidden duration-200 ${expanded ? 'px-4' : 'px-0'} ${colapse ? 'h-0 border-0' : 'h-[110px] block rounded-lg duration-200'}`}>
                         <NavLink to={'/project/all_project'} className={({isActive})=> isActive ? `p-3 my-1 bg-indigo-100 text-indigo-600  rounded-md text-sm flex items-center transition-all` : `p-3 my-1 hover:bg-indigo-100 hover:text-indigo-600 rounded-md text-sm flex items-center transition-all`}>
                             <FaCartFlatbed className='text-xl' />
                             <span className={`overflow-hidden ${expanded ? 'ml-3 w-40 transition-all' : ' w-0 hidden transition-all'} `}>All Projects</span>
                         </NavLink>
-                        <NavLink to={'/project/add_project'} className={({isActive})=> isActive ? `p-3 my-1 bg-indigo-100 text-indigo-600 text-sm rounded-md flex items-center transition-all` : `p-3 my-1 hover:bg-indigo-100 hover:text-indigo-600 text-sm flex items-center transition-all`}>
+                        <NavLink to={'/project/add_project'} className={({isActive})=> isActive ? `p-3 my-1 bg-indigo-100 text-indigo-600 text-sm rounded-md flex items-center transition-all` : `p-3 my-1 hover:bg-indigo-100 hover:text-indigo-600 rounded-md text-sm flex items-center transition-all`}>
                             <BiCategory className='text-xl' />
                             <span className={`overflow-hidden ${expanded ? 'ml-3 w-40 transition-all' : ' w-0 hidden transition-all'} `}>Add Project</span>
                         </NavLink>
